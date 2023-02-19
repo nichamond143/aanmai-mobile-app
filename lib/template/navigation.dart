@@ -24,7 +24,6 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
 }
 
 Widget buildHeader(BuildContext context) => Material(
-      color: Colors.orangeAccent,
       child: InkWell(
         onTap: () {
           Navigator.pop(context);
@@ -44,7 +43,10 @@ Widget buildHeader(BuildContext context) => Material(
                 ),
                 SizedBox(height: 12),
                 Text('Annabeth Chase',
-                    style: TextStyle(fontSize: 24, color: Colors.white))
+                    style: TextStyle(
+                        fontSize: 24,
+                        color: Colors.orangeAccent,
+                        fontWeight: FontWeight.bold))
               ],
             )),
       ),
@@ -55,18 +57,75 @@ Widget buildMenuItems(BuildContext context) => Container(
       child: Wrap(
         children: [
           ListTile(
+              iconColor: Colors.orangeAccent,
               leading: const Icon(Icons.home_outlined),
-              title: const Text('Home'),
+              title: const Text('Home',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () => Navigator.of(context).pushReplacement(
                   MaterialPageRoute(builder: (context) => HomePage()))),
           ListTile(
+              iconColor: Colors.orangeAccent,
               leading: const Icon(Icons.favorite_border),
-              title: const Text('Favorites'),
+              title: const Text('Favorites',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
                     MaterialPageRoute(builder: (context) => Placeholder()));
-              })
+              }),
+          ListTile(
+              iconColor: Colors.orangeAccent,
+              leading: const Icon(Icons.local_library_outlined),
+              title: const Text('Book Club',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Placeholder()));
+              }),
+          ListTile(
+              iconColor: Colors.orangeAccent,
+              leading: const Icon(Icons.checklist_rtl_outlined),
+              title: const Text('Activities',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Placeholder()));
+              }),
+          ListTile(
+              iconColor: Colors.orangeAccent,
+              leading: const Icon(Icons.newspaper_outlined),
+              title: const Text('News',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Placeholder()));
+              }),
+          ListTile(
+              iconColor: Colors.orangeAccent,
+              leading: const Icon(Icons.settings_outlined),
+              title: const Text('Settings',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              onTap: () {
+                Navigator.pop(context);
+                Navigator.of(context).push(
+                    MaterialPageRoute(builder: (context) => Placeholder()));
+              }),
+          ListTile(
+              iconColor: Colors.orangeAccent,
+              leading: const Icon(Icons.logout_outlined),
+              title: const Text('Logout',
+                  style: TextStyle(
+                      color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
+              onTap: () => Navigator.pushNamed(context, '/logout'))
         ],
       ),
     );

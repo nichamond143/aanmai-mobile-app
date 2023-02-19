@@ -24,8 +24,10 @@ dev_dependencies:
 
 flutter:
   assets:
-    - assets/images/
-    - assets/reviews/warcross.txt
+    - assets/images/backgrounds/
+    - assets/images/bookcovers/
+    - assets/images/people/
+    - assets/longtext/
   fonts:
     - family: Poppins
       fonts:
