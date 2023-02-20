@@ -14,12 +14,15 @@ class MyApp extends StatelessWidget {
       child: MaterialApp(
           title: 'Aan Mai',
           theme: ThemeData(
-            useMaterial3: true,
-            fontFamily: 'Poppins',
-            primaryColor: Color.fromARGB(255, 236, 153, 75),
-            colorScheme: ColorScheme.fromSeed(
-                seedColor: Color.fromARGB(255, 236, 153, 75)),
-          ),
+              useMaterial3: true,
+              fontFamily: 'Poppins',
+              primaryColor: Color.fromARGB(255, 236, 153, 75),
+              colorScheme: ColorScheme.fromSeed(
+                  seedColor: Color.fromARGB(255, 236, 153, 75)),
+              appBarTheme: AppBarTheme(
+                iconTheme: IconThemeData(color: Colors.black),
+                color: Color.fromARGB(220, 236, 153, 75), //<-- SEE HERE
+              )),
           initialRoute: '/',
           routes: {
             '/': (context) => LandingPage(),

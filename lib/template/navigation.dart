@@ -125,7 +125,7 @@ Widget buildMenuItems(BuildContext context) => Container(
               title: const Text('Logout',
                   style: TextStyle(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
-              onTap: () => Navigator.pushNamed(context, '/logout'))
+              onTap: () => Navigator.pushNamed(context, '/login'))
         ],
       ),
     );
