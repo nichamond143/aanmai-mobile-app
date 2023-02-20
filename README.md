@@ -1,6 +1,10 @@
 # aanmai_app
 
-A new Flutter project.
+A mobile app which recommends users a variety of book recommendations with reviews, ratings, and book related activities. This lifestyle application is made for people who have trouble deciding whether to read and/or buy a book. The features include:
+
+· Recommend books by genre, author, and language
+
+· View ratings and reviews
 
 ## Getting Started
 
