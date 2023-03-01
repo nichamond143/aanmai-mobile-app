@@ -1,0 +1,39 @@
+{
+  "project_info": {
+    "project_number": "968111616162",
+    "project_id": "aan-mai-app-64ede",
+    "storage_bucket": "aan-mai-app-64ede.appspot.com"
+  },
+  "client": [
+    {
+      "client_info": {
+        "mobilesdk_app_id": "1:968111616162:android:c2a5586bc60100fbf467fb",
+        "android_client_info": {
+          "package_name": "com.example.aanmai_app"
+        }
+      },
+      "oauth_client": [
+        {
+          "client_id": "968111616162-tfuf2bse1lg9v86vltvoktib6127r3ms.apps.googleusercontent.com",
+          "client_type": 3
+        }
+      ],
+      "api_key": [
+        {
+          "current_key": "AIzaSyDIfLn1PvLu8_c1HOKX1IrS_kc-bpwEBLg"
+        }
+      ],
+      "services": {
+        "appinvite_service": {
+          "other_platform_oauth_client": [
+            {
+              "client_id": "968111616162-tfuf2bse1lg9v86vltvoktib6127r3ms.apps.googleusercontent.com",
+              "client_type": 3
+            }
+          ]
+        }
+      }
+    }
+  ],
+  "configuration_version": "1"
+}

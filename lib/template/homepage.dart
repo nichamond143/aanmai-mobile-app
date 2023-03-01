@@ -64,21 +64,6 @@ class _HomePageState extends State<HomePage> {
       'Technology'
     ];
 
-    var weeklyRec = <String>[
-      'assets/images/bookcovers/hailprojectmary.jpg',
-      'assets/images/bookcovers/perksofbeingawallflower.jpg',
-      'assets/images/bookcovers/fightclub.jpg',
-      'assets/images/bookcovers/evelynhugo.jpg',
-      'assets/images/bookcovers/warcross.jpg'
-    ];
-    var valentineDay = <String>[
-      'assets/images/bookcovers/annaAndTheFrenchKiss.jpg',
-      'assets/images/bookcovers/tooalltheboys.jpg',
-      'assets/images/bookcovers/thekissquotient.jpg',
-      'assets/images/bookcovers/geekerella.jpg',
-      'assets/images/bookcovers/theselection.jpg'
-    ];
-
     var featured = <String>[
       'assets/images/people/grethathunberg.png',
       'assets/images/people/bill.jpg',
@@ -172,13 +157,13 @@ class _HomePageState extends State<HomePage> {
               subHeading: 'See recommendations curated just for you!',
               width: width,
             ),
-            BookList(bookCovers: weeklyRec),
+            BookList(bookList: "weeklyRecommend"),
             SizedBox(
                 height: 450,
                 child: Card(
                     color: pumpkin,
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Wrap(children: [
                         Row(children: [
                           Padding(
@@ -209,10 +194,11 @@ class _HomePageState extends State<HomePage> {
                                 children: [
                                   for (var i = 0; i < 5; i++) ...[
                                     if (i == 4) ...[
-                                      Icon(Icons.star_rate, color: Colors.grey)
+                                      Icon(Icons.star_rate,
+                                          color: Colors.grey, size: 16)
                                     ] else ...[
                                       Icon(Icons.star_rate,
-                                          color: Colors.yellow)
+                                          color: Colors.yellow, size: 16)
                                     ]
                                   ]
                                 ],
@@ -263,7 +249,7 @@ class _HomePageState extends State<HomePage> {
               subHeading: 'See some of our most romantic recommendations!',
               width: width,
             ),
-            BookList(bookCovers: valentineDay),
+            BookList(bookList: "valentineDay"),
             Categories(
                 heading: 'Industries',
                 color: pumpkin,
@@ -275,11 +261,11 @@ class _HomePageState extends State<HomePage> {
                 width: width),
             PeopleList(pictures: featured, names: featuredName),
             SizedBox(
-                height: 450,
+                height: 400,
                 child: Card(
                     color: pumpkin,
                     child: Padding(
-                      padding: const EdgeInsets.all(20.0),
+                      padding: const EdgeInsets.all(10.0),
                       child: Wrap(children: [
                         Row(children: [
                           Padding(
@@ -291,7 +277,7 @@ class _HomePageState extends State<HomePage> {
                                 child: Image.asset(
                                     'assets/images/people/malala.jpg',
                                     fit: BoxFit.cover,
-                                    height: 250)),
+                                    height: 200)),
                           ),
                           Expanded(
                               child: Column(
