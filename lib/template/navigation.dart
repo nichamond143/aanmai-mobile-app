@@ -73,7 +73,7 @@ Widget buildMenuItems(BuildContext context) => Container(
               onTap: () {
                 Navigator.pop(context);
                 Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                    MaterialPageRoute(builder: (context) => FavoritesPage()));
               }),
           ListTile(
               iconColor: Colors.orangeAccent,

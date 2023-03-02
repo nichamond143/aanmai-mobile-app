@@ -1,13 +1,11 @@
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
-import 'package:provider/provider.dart';
 import 'dart:async' show Future;
 import 'package:aanmai_app/components/headings.dart';
 import 'package:aanmai_app/components/booklist.dart';
 import 'package:aanmai_app/components/categories.dart';
 import 'package:aanmai_app/components/peoplelist.dart';
-import 'layout.dart';
 import 'navigation.dart';
 
 class HomePage extends StatefulWidget {
@@ -33,8 +31,6 @@ class _HomePageState extends State<HomePage> {
   @override
   Widget build(BuildContext context) {
     readFile();
-
-    var appState = context.watch<MyAppState>();
 
     var genre = <String>[
       'Fantasy',

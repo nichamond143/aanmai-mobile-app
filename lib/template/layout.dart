@@ -1,3 +1,4 @@
+import 'package:aanmai_app/provider/favorite_provider.dart';
 import 'package:aanmai_app/template/homepage.dart';
 import 'package:aanmai_app/template/login.dart';
 import 'package:aanmai_app/template/reviewpage.dart';
@@ -10,7 +11,7 @@ class MyApp extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return ChangeNotifierProvider(
-      create: (context) => MyAppState(),
+      create: (context) => FavoriteProvider(),
       child: MaterialApp(
           title: 'Aan Mai',
           theme: ThemeData(
@@ -32,11 +33,6 @@ class MyApp extends StatelessWidget {
           }),
     );
   }
-}
-
-// Define app's state (ChangeNotifier)
-class MyAppState extends ChangeNotifier {
-  // Data variable app needs to function
 }
 
 class LandingPage extends StatelessWidget {
