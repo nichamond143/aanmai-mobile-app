@@ -60,38 +60,6 @@ class _HomePageState extends State<HomePage> {
       'Technology'
     ];
 
-    var featured = <String>[
-      'assets/images/people/grethathunberg.png',
-      'assets/images/people/bill.jpg',
-      'assets/images/people/jordanpeele.jpg',
-      'assets/images/people/taylorswift.jpg',
-      'assets/images/people/maya-angelou.jpg'
-    ];
-
-    var featuredName = <String>[
-      'Greta Thunberg',
-      'Bill Gates',
-      'Jordan Peele',
-      'Taylor Swift',
-      'Maya Angelou',
-    ];
-
-    var famousThais = <String>[
-      'assets/images/people/JenniferPaweensuda.jpg',
-      'assets/images/people/Kanatip.png',
-      'assets/images/people/Pita.jpg',
-      'assets/images/people/davika.jpg',
-      'assets/images/people/Ariya-Banomyong.jpg'
-    ];
-
-    var thaiNames = <String>[
-      'Paweensuda Drouin',
-      'Kanatip Soonthornrak',
-      'Pita Limjaroenrat',
-      'Davika Hoorne',
-      'Ariya Banomyong',
-    ];
-
     var theme = Theme.of(context);
     Color pumpkin = theme.primaryColor;
 
@@ -255,7 +223,7 @@ class _HomePageState extends State<HomePage> {
             SubHeading(
                 subHeading: 'See what our featured people have recommended',
                 width: width),
-            PeopleList(pictures: featured, names: featuredName),
+            PeopleList(people: "featurePeople",),
             SizedBox(
                 height: 400,
                 child: Card(
@@ -320,7 +288,7 @@ class _HomePageState extends State<HomePage> {
             SubHeading(
                 subHeading: 'See recommendations from people in Thailand!',
                 width: width),
-            PeopleList(pictures: famousThais, names: thaiNames),
+            PeopleList(people: "famousThais",),
             ClipRRect(
                 borderRadius: BorderRadius.circular(30.0),
                 child: SizedBox.fromSize(

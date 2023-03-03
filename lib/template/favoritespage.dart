@@ -45,25 +45,25 @@ class FavoritesPage extends StatelessWidget {
                                 ClipRRect(
                                     borderRadius: BorderRadius.circular(
                                         10), // Image border
-                                    child: Image.network(
+                                    child: Image.asset(
                                       documentSnapshot['thumbnail'],
                                       fit: BoxFit.cover,
                                       height: 250,
                                     )),
                                 Positioned(
                                   right: 10,
-                                  bottom: 25,
+                                  bottom: 10,
                                   child: ClipOval(
                                     child: Container(
                                       color: Color.fromARGB(255, 236, 153, 75),
-                                      width: 60,
-                                      height: 60,
+                                      width: 40,
+                                      height: 40,
                                     ),
                                   ),
                                 ),
                                 Positioned(
-                                    right: 12.5,
-                                    bottom: 25,
+                                    right: 10,
+                                    bottom: 10,
                                     child: IconButton(
                                       onPressed: () async {
                                         provider.toggleFavorite(bookTitle);
@@ -73,9 +73,9 @@ class FavoritesPage extends StatelessWidget {
                                       },
                                       icon: provider.isExist(bookTitle)
                                           ? const Icon(Icons.favorite,
-                                              color: Colors.red, size: 40.0)
+                                              color: Colors.red, size: 25.0)
                                           : const Icon(Icons.favorite_border,
-                                              color: Colors.white, size: 40.0),
+                                              color: Colors.white, size: 25.0),
                                     )),
                               ],
                             ));
