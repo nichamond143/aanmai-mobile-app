@@ -33,13 +33,18 @@ class _PeopleListState extends State<PeopleList> {
                     return Padding(
                         padding:
                             const EdgeInsets.only(right: 10.0, bottom: 10.0),
-                        child: Stack(children: [
-                          ClipRRect(
-                              borderRadius:
-                                  BorderRadius.circular(20), // Image border
-                              child: Image.asset(documentSnapshot['picture'],
-                                  fit: BoxFit.cover, height: 200, width: 175,)),
-                        ]));
+                        child: Column(
+                          children: [
+                            Expanded(child:
+                              ClipRRect(
+                                  borderRadius:
+                                      BorderRadius.circular(20), // Image border
+                                  child: Image.network(documentSnapshot['picture'],
+                                      fit: BoxFit.cover, height: 200, width: 175,)),
+                            ),
+                            Text(documentSnapshot['name'])
+                          ],
+                        ) );
                   }),
             );
           } else if (streamSnapshot.hasError) {

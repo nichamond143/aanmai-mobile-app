@@ -46,7 +46,7 @@ class _BookListState extends State<BookList> {
                           ClipRRect(
                               borderRadius:
                                   BorderRadius.circular(20), // Image border
-                              child: Image.asset(
+                              child: Image.network(
                                   documentSnapshot['thumbnail'],
                                   fit: BoxFit.cover,
                                   height: 250)),
