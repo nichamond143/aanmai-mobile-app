@@ -3,7 +3,7 @@ import 'package:firebase_core/firebase_core.dart';
 import 'template/layout.dart';
 
 Future main() async {
-  WidgetsFlutterBinding.ensureInitialized;
+  WidgetsFlutterBinding.ensureInitialized();
   await Firebase.initializeApp(
       options: FirebaseOptions(
           apiKey: 'AIzaSyDIfLn1PvLu8_c1HOKX1IrS_kc-bpwEBLg',

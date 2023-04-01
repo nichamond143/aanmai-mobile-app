@@ -17,6 +17,7 @@ class _HomePageState extends State<HomePage> {
   String reviewtxt = "";
   String biotxt = "";
 
+  //Get featured book review
   Future<void> readFile() async {
     final String review =
         await rootBundle.loadString('assets/longtext/catcherintherye.txt');

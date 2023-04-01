@@ -1,6 +1,6 @@
 import 'package:aanmai_app/provider/favorite_provider.dart';
+import 'package:aanmai_app/template/auth_page.dart';
 import 'package:aanmai_app/template/homepage.dart';
-import 'package:aanmai_app/template/login.dart';
 import 'package:aanmai_app/template/reviewpage.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
@@ -27,7 +27,7 @@ class MyApp extends StatelessWidget {
           initialRoute: '/',
           routes: {
             '/': (context) => LandingPage(),
-            '/login': (context) => LogIn(),
+            '/login': (context) => AuthPage(),
             '/home': (context) => HomePage(),
             '/review': (context) => ReviewPage(),
           }),

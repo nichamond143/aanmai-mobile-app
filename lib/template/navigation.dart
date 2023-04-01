@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'favoritespage.dart';
 import 'homepage.dart';
@@ -23,6 +24,12 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
       )));
 }
 
+//Log Users Out
+void logUserOut() {
+  FirebaseAuth.instance.signOut();
+}
+
+//Profile Picture and Name
 Widget buildHeader(BuildContext context) => Material(
       child: InkWell(
         onTap: () {
@@ -52,6 +59,7 @@ Widget buildHeader(BuildContext context) => Material(
       ),
     );
 
+//Drawer Menu Items
 Widget buildMenuItems(BuildContext context) => Container(
       padding: const EdgeInsets.all(24),
       child: Wrap(
@@ -125,7 +133,7 @@ Widget buildMenuItems(BuildContext context) => Container(
               title: const Text('Logout',
                   style: TextStyle(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
-              onTap: () => Navigator.pushNamed(context, '/login'))
+              onTap: () => logUserOut())
         ],
       ),
     );

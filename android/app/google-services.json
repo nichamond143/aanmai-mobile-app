@@ -29,6 +29,13 @@
             {
               "client_id": "968111616162-tfuf2bse1lg9v86vltvoktib6127r3ms.apps.googleusercontent.com",
               "client_type": 3
+            },
+            {
+              "client_id": "968111616162-f5b32klhr4ceqa3vpc4in6p71lp4v3j3.apps.googleusercontent.com",
+              "client_type": 2,
+              "ios_info": {
+                "bundle_id": "com.example.aanmaiApp"
+              }
             }
           ]
         }
