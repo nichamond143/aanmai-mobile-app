@@ -6,7 +6,7 @@ import 'package:aanmai_app/components/headings.dart';
 import 'package:aanmai_app/components/booklist.dart';
 import 'package:aanmai_app/components/categories.dart';
 import 'package:aanmai_app/components/peoplelist.dart';
-import 'navigation.dart';
+import '../components/navigationbar.dart';
 
 class HomePage extends StatefulWidget {
   @override

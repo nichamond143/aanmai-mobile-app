@@ -1,7 +1,7 @@
 import 'package:aanmai_app/provider/favorite_provider.dart';
-import 'package:aanmai_app/template/auth_page.dart';
-import 'package:aanmai_app/template/homepage.dart';
-import 'package:aanmai_app/template/reviewpage.dart';
+import 'package:aanmai_app/auth/auth_page.dart';
+import 'package:aanmai_app/pages/home.dart';
+import 'package:aanmai_app/pages/review.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 

@@ -1,5 +1,5 @@
-import 'package:aanmai_app/template/homepage.dart';
-import 'package:aanmai_app/template/login.dart';
+import 'package:aanmai_app/pages/home.dart';
+import 'package:aanmai_app/auth/login_or_signup.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -20,8 +20,8 @@ class AuthPage extends StatelessWidget {
           //user is not logged in
           else
           {
-            print('User is not logged in');
-            return LogIn();
+            print('User is logged out');
+            return LogInOrSignUpPage();
           }
         })
     );

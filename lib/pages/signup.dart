@@ -3,50 +3,46 @@ import 'package:aanmai_app/components/square_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
-class LogIn extends StatefulWidget {
-  LogIn({super.key});
+class SignUp extends StatefulWidget {
+  final Function()? onTap;
+  const SignUp({super.key, required this.onTap});
 
   @override
-  State<LogIn> createState() => _LogInState();
+  State<SignUp> createState() => _SignUpState();
 }
 
-class _LogInState extends State<LogIn> {
+class _SignUpState extends State<SignUp> {
   final TextEditingController emailController = TextEditingController();
-
   final TextEditingController passwordController = TextEditingController();
+  final TextEditingController confirmPassController = TextEditingController();
 
-  //Log in users
-  void logInUsers() async {
+  //Sign up users
+  void signUpUsers() async {
     showDialog(
       context: context,
       builder: (context) => Center(child: CircularProgressIndicator()),
     );
 
     try {
-      await FirebaseAuth.instance.signInWithEmailAndPassword(
-          email: emailController.text, password: passwordController.text);
+      if (passwordController.text == confirmPassController.text) {
+        await FirebaseAuth.instance.createUserWithEmailAndPassword(
+            email: emailController.text, password: passwordController.text);
+      }
+      else{
+        showErrorMessage("Oops! Passwords don't match");
+      }
 
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
 
-      //invalid email
-      if (e.code == 'invalid-email') {
-        print('User not found');
-        //notify user
-        invalidEmailMessage();
-
-        //invalid password
-      } else if (e.code == 'wrong-password') {
-        print('Invalid password');
-        //notify user
-        invalidPasswordMessage();
-      }
+      //Show error message
+      showErrorMessage(e.code);
     }
   }
 
-  //Invalid Email Notification
-  void invalidEmailMessage() {
+  //Invalid Email or Password Notification
+  void showErrorMessage(String message) {
     showDialog(
         context: context,
         builder: (context) {
@@ -56,38 +52,11 @@ class _LogInState extends State<LogIn> {
                 Icon(Icons.sentiment_dissatisfied_outlined),
                 SizedBox(width: 10.0),
                 Text(
-                  'Invalid Email Address',
+                  message,
                   style: TextStyle(fontSize: 20.0),
                 )
               ],
             ),
-            content: const Text(
-                'Sorry! This user does not exist or the email address you\'ve entered is incorrect.'),
-            actions: <Widget>[
-              TextButton(
-                onPressed: () => Navigator.pop(context, 'OK'),
-                child: const Text('OK'),
-              ),
-            ],
-          );
-        });
-  }
-
-  //invalid Password Notification
-  void invalidPasswordMessage() {
-    showDialog(
-        context: context,
-        builder: (context) {
-          return AlertDialog(
-            title: Row(
-              children: [
-                Icon(Icons.sentiment_dissatisfied_outlined),
-                SizedBox(width: 10.0),
-                Text('Invalid Password')
-              ],
-            ),
-            content:
-                const Text('Sorry! The password you\'ve enter is incorrect.'),
             actions: <Widget>[
               TextButton(
                 onPressed: () => Navigator.pop(context, 'OK'),
@@ -115,7 +84,7 @@ class _LogInState extends State<LogIn> {
                             alignment: Alignment.center,
                             padding: const EdgeInsets.only(bottom: 25.0),
                             child: const Text(
-                              'Login',
+                              'Sign Up',
                               style: TextStyle(
                                   color: Color(0xFF46474B),
                                   fontWeight: FontWeight.bold,
@@ -138,17 +107,11 @@ class _LogInState extends State<LogIn> {
                           icon: Icons.lock_outlined,
                         ),
 
-                        //Forgot Password
-                        TextButton(
-                          onPressed: () {
-                            //forgot password screen
-                          },
-                          child: const Text(
-                            'Forgot Password?',
-                            style: TextStyle(
-                              color: Color(0xFFF68922),
-                            ),
-                          ),
+                        MyTextField(
+                          controller: confirmPassController,
+                          hintText: 'Confirm Password',
+                          obsecuredText: true,
+                          icon: Icons.lock_outlined,
                         ),
 
                         SizedBox(height: 20),
@@ -164,7 +127,7 @@ class _LogInState extends State<LogIn> {
                                   shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(25))),
                               child: const Text(
-                                'Login',
+                                'Sign Up',
                                 style: TextStyle(
                                     color: Colors.white,
                                     fontWeight: FontWeight.w400,
@@ -172,7 +135,7 @@ class _LogInState extends State<LogIn> {
                               ),
                               onPressed: () {
                                 //Log in Users
-                                logInUsers();
+                                signUpUsers();
                               },
                             )),
 
@@ -221,18 +184,16 @@ class _LogInState extends State<LogIn> {
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: <Widget>[
-                            const Text('Don\'t have an account?'),
+                            const Text('Already have an account?'),
                             Padding(
                               padding: const EdgeInsets.all(5.0),
-                              child: TextButton(
-                                child: const Text(
-                                  'Register Now',
+                              child: GestureDetector(
+                                onTap: widget.onTap,
+                                child: Text(
+                                  'Log In Now',
                                   style: TextStyle(
                                       fontSize: 15, color: Color(0xFFF68922)),
                                 ),
-                                onPressed: () {
-                                  //signup screen
-                                },
                               ),
                             )
                           ],

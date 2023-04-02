@@ -1,7 +1,7 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
-import 'favoritespage.dart';
-import 'homepage.dart';
+import '../pages/favorites.dart';
+import '../pages/home.dart';
 
 class HamburgerDrawer extends StatefulWidget {
   const HamburgerDrawer({
