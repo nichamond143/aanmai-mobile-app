@@ -1,3 +1,4 @@
+import 'package:aanmai_app/auth/auth_service.dart';
 import 'package:aanmai_app/components/login_textfield.dart';
 import 'package:aanmai_app/components/square_tile.dart';
 import 'package:firebase_auth/firebase_auth.dart';
@@ -27,8 +28,7 @@ class _SignUpState extends State<SignUp> {
       if (passwordController.text == confirmPassController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
             email: emailController.text, password: passwordController.text);
-      }
-      else{
+      } else {
         showErrorMessage("Oops! Passwords don't match");
       }
 
@@ -164,8 +164,9 @@ class _SignUpState extends State<SignUp> {
 
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
-                          children: const [
+                          children: [
                             SquareTile(
+                                onTap: () => AuthService().signInWithGoogle(),
                                 imagePath:
                                     'assets/images/logos/google-logo.png',
                                 label: 'Google'),
@@ -173,6 +174,7 @@ class _SignUpState extends State<SignUp> {
                               width: 25.0,
                             ),
                             SquareTile(
+                                onTap: () => AuthService().signInWithFacebook(),
                                 imagePath:
                                     'assets/images/logos/facebook-logo.png',
                                 label: 'Facebook')

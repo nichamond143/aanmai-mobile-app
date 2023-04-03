@@ -1,0 +1,8 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">Aan Mai App</string>
+    <string name="facebook_app_id">137315195967266</string>
+    <string name="fb_login_protocol_scheme">fb137315195967266</string>
+    <string name="facebook_client_token">b0091168492a5180e7bae247cb47429c</string>
+</resources>
+
