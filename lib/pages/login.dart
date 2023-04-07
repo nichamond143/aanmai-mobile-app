@@ -28,6 +28,7 @@ class _LogInState extends State<LogIn> {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
 
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
@@ -70,10 +71,11 @@ class _LogInState extends State<LogIn> {
             colorSchemeSeed: const Color(0xFFF68922), useMaterial3: true),
         home: Scaffold(
             backgroundColor: Color(0xFFF9E3CE),
+            resizeToAvoidBottomInset: false,
             body: SafeArea(
               child: Center(
                 child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 75, 30, 0),
+                    padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
                     child: ListView(
                       children: <Widget>[
                         Container(
@@ -107,6 +109,7 @@ class _LogInState extends State<LogIn> {
                         TextButton(
                           onPressed: () {
                             //forgot password screen
+                            Navigator.pushNamed(context, '/resetPassword');
                           },
                           child: const Text(
                             'Forgot Password?',
@@ -176,7 +179,7 @@ class _LogInState extends State<LogIn> {
                               width: 25.0,
                             ),
                             SquareTile(
-                              onTap: () => AuthService().signInWithFacebook(),
+                                onTap: () => AuthService().signInWithFacebook(),
                                 imagePath:
                                     'assets/images/logos/facebook-logo.png',
                                 label: 'Facebook')
@@ -194,11 +197,12 @@ class _LogInState extends State<LogIn> {
                               child: GestureDetector(
                                 onTap: widget.onTap,
                                 child: Text(
-                                    'Sign Up Now',
-                                    style: TextStyle(
-                                        fontSize: 15, color: Color(0xFFF68922)),
-                                  ),
-                              ),)
+                                  'Sign Up Now',
+                                  style: TextStyle(
+                                      fontSize: 15, color: Color(0xFFF68922)),
+                                ),
+                              ),
+                            )
                           ],
                         ),
                       ],

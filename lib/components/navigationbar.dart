@@ -6,7 +6,12 @@ import '../pages/home.dart';
 class HamburgerDrawer extends StatefulWidget {
   const HamburgerDrawer({
     super.key,
+    required this.name,
+    required this.photoUrl,
   });
+
+  final String? name;
+  final String photoUrl;
 
   @override
   State<HamburgerDrawer> createState() => _HamburgerDrawerState();
@@ -18,7 +23,7 @@ class _HamburgerDrawerState extends State<HamburgerDrawer> {
           child: SingleChildScrollView(
               child: Column(
         children: <Widget>[
-          buildHeader(context),
+          buildHeader(context, widget.name, widget.photoUrl),
           buildMenuItems(context),
         ],
       )));
@@ -30,7 +35,8 @@ void logUserOut() {
 }
 
 //Profile Picture and Name
-Widget buildHeader(BuildContext context) => Material(
+Widget buildHeader(BuildContext context, String? name, String photoUrl) =>
+    Material(
       child: InkWell(
         onTap: () {
           Navigator.pop(context);
@@ -45,13 +51,12 @@ Widget buildHeader(BuildContext context) => Material(
               children: [
                 CircleAvatar(
                   radius: 52,
-                  backgroundImage: NetworkImage(
-                      'https://qph.cf2.quoracdn.net/main-qimg-ec8edeb42bf09fbcb34c3ca7b6f623b5-lq'),
+                  backgroundImage: NetworkImage(photoUrl),
                 ),
                 SizedBox(height: 12),
-                Text('Annabeth Chase',
+                Text(name ?? 'User123',
                     style: TextStyle(
-                        fontSize: 24,
+                        fontSize: 16,
                         color: Colors.orangeAccent,
                         fontWeight: FontWeight.bold))
               ],

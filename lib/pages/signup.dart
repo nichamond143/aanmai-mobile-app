@@ -1,6 +1,7 @@
 import 'package:aanmai_app/auth/auth_service.dart';
 import 'package:aanmai_app/components/login_textfield.dart';
 import 'package:aanmai_app/components/square_tile.dart';
+import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 
@@ -13,6 +14,8 @@ class SignUp extends StatefulWidget {
 }
 
 class _SignUpState extends State<SignUp> {
+  final TextEditingController firstNameController = TextEditingController();
+  final TextEditingController lastNameController = TextEditingController();
   final TextEditingController emailController = TextEditingController();
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
@@ -27,18 +30,35 @@ class _SignUpState extends State<SignUp> {
     try {
       if (passwordController.text == confirmPassController.text) {
         await FirebaseAuth.instance.createUserWithEmailAndPassword(
-            email: emailController.text, password: passwordController.text);
+          email: emailController.text,
+          password: passwordController.text,
+        );
+        final User? currentUser = FirebaseAuth.instance.currentUser;
+        await saveUser(firstNameController.text.trim(),
+            lastNameController.text.trim(), emailController.text.trim(), currentUser);
+
+        // ignore: use_build_context_synchronously
+        Navigator.pop(context);
       } else {
         showErrorMessage("Oops! Passwords don't match");
       }
-
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
       Navigator.pop(context);
 
       //Show error message
       showErrorMessage(e.code);
     }
+  }
+
+  Future<void> saveUser(
+      String firstName, String lastName, String email, User? currentUser) async {
+    await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).set({
+      "email": email,
+      "firstName": firstName,
+      "lastName": lastName,
+      "photoUrl": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      "uid": currentUser.uid,
+    });
   }
 
   //Invalid Email or Password Notification
@@ -74,10 +94,11 @@ class _SignUpState extends State<SignUp> {
             colorSchemeSeed: const Color(0xFFF68922), useMaterial3: true),
         home: Scaffold(
             backgroundColor: Color(0xFFF9E3CE),
+            resizeToAvoidBottomInset: false,
             body: SafeArea(
               child: Center(
                 child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 75, 30, 0),
+                    padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
                     child: ListView(
                       children: <Widget>[
                         Container(
@@ -90,6 +111,21 @@ class _SignUpState extends State<SignUp> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 50),
                             )),
+
+                        //Input Name
+                        MyTextField(
+                          controller: firstNameController,
+                          hintText: 'First Name',
+                          obsecuredText: false,
+                          icon: Icons.person_outlined,
+                        ),
+
+                        MyTextField(
+                          controller: lastNameController,
+                          hintText: 'Last Name',
+                          obsecuredText: false,
+                          icon: Icons.person_outlined,
+                        ),
 
                         //Input Email
                         MyTextField(
@@ -200,6 +236,7 @@ class _SignUpState extends State<SignUp> {
                             )
                           ],
                         ),
+                        SizedBox(height: 50.0),
                       ],
                     )),
               ),

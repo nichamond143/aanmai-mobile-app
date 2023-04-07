@@ -5,6 +5,8 @@ import 'package:aanmai_app/pages/review.dart';
 import 'package:flutter/material.dart';
 import 'package:provider/provider.dart';
 
+import 'forgot_password.dart';
+
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
@@ -30,6 +32,7 @@ class MyApp extends StatelessWidget {
             '/login': (context) => AuthPage(),
             '/home': (context) => HomePage(),
             '/review': (context) => ReviewPage(),
+            '/resetPassword': (context) => ForgotPasswordPage(),
           }),
     );
   }

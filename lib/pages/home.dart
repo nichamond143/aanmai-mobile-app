@@ -1,3 +1,5 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter/services.dart';
@@ -16,6 +18,9 @@ class HomePage extends StatefulWidget {
 class _HomePageState extends State<HomePage> {
   String reviewtxt = "";
   String biotxt = "";
+  String firstName = "";
+  String fullName = "";
+  String photoUrl = "";
 
   //Get featured book review
   Future<void> readFile() async {
@@ -28,6 +33,26 @@ class _HomePageState extends State<HomePage> {
       biotxt = bio;
     });
   }
+
+  //get User Name and PhotoUrl
+  // Future getUserData() async {
+  //   final currentUser = FirebaseAuth.instance.currentUser!;
+  //   await FirebaseFirestore.instance
+  //       .collection('users')
+  //       .doc(currentUser.uid)
+  //       .get()
+  //       .then((snapshot) {
+  //     displayName = snapshot['displayName'];
+  //     photoUrl = snapshot['photoUrl'];
+  //   }
+  //   );
+  // }
+
+  @override
+  // void initState() {
+  //   getUserData();
+  //   super.initState();
+  // }
 
   @override
   Widget build(BuildContext context) {
@@ -66,239 +91,283 @@ class _HomePageState extends State<HomePage> {
 
     double width = MediaQuery.of(context).size.width;
 
-    return Scaffold(
-      appBar: AppBar(
-          leading: Builder(builder: (BuildContext context) {
-            return IconButton(
-              icon: const Icon(Icons.sort, size: 40.0),
-              tooltip: 'Menu Icon',
-              onPressed: () {
-                Scaffold.of(context).openDrawer();
-              },
+    CollectionReference users = FirebaseFirestore.instance.collection('users');
+
+    String uid = FirebaseAuth.instance.currentUser!.uid;
+
+    return FutureBuilder(
+        future: users.doc(uid).get(),
+        builder: (context, snapshot) {
+          if (!snapshot.hasData) {
+            return Center(
+              child: CircularProgressIndicator(),
             );
-          }),
-          actions: <Widget>[
-            Icon(Icons.notifications_none, size: 35.0),
-          ]),
-      drawer: HamburgerDrawer(),
-      body: Padding(
-        padding: const EdgeInsets.all(25.0),
-        child: ListView(
-          scrollDirection: Axis.vertical,
-          children: [
-            Row(
-              children: [
-                SizedBox(
-                  width: width * 0.75,
-                  child: FittedBox(
-                    child: Text(
-                      'Hi Annabeth, \nWelcome Back!',
-                      style: TextStyle(fontWeight: FontWeight.bold),
+          }
+          Map<String, dynamic> data =
+              snapshot.data!.data() as Map<String, dynamic>;
+          firstName = data['firstName'];
+          fullName = "${data['firstName']} ${data['lastName']}";
+          photoUrl = data['photoUrl'];
+          return Scaffold(
+            appBar: AppBar(
+                leading: Builder(builder: (BuildContext context) {
+                  return IconButton(
+                    icon: const Icon(Icons.sort, size: 40.0),
+                    tooltip: 'Menu Icon',
+                    onPressed: () {
+                      Scaffold.of(context).openDrawer();
+                    },
+                  );
+                }),
+                actions: <Widget>[
+                  Icon(Icons.notifications_none, size: 35.0),
+                ]),
+            drawer: HamburgerDrawer(
+              name: fullName,
+              photoUrl: photoUrl,
+            ),
+            body: Padding(
+              padding: const EdgeInsets.all(25.0),
+              child: SizedBox(
+                height: MediaQuery.of(context).size.height,
+                child: ListView(
+                  scrollDirection: Axis.vertical,
+                  children: [
+                    Row(
+                      children: [
+                        SizedBox(
+                          width: width * 0.75,
+                          child: FittedBox(
+                            child: Text(
+                              'Hi $firstName, \nWelcome Back!',
+                              style: TextStyle(fontWeight: FontWeight.bold),
+                            ),
+                          ),
+                        ),
+                      ],
                     ),
-                  ),
-                ),
-              ],
-            ),
-            Padding(
-              padding: const EdgeInsets.only(top: 35.0, bottom: 30.0),
-              child: ClipRRect(
-                  borderRadius: BorderRadius.circular(30.0),
-                  child: SizedBox.fromSize(
-                      size: Size(width, 200),
-                      child: Image.asset('assets/images/backgrounds/AANMAI.jpg',
-                          fit: BoxFit.cover))),
-            ),
-            Categories(
-                heading: 'Book Genres',
-                color: pumpkin,
-                width: width,
-                categories: genre),
-            Heading(
-              heading: 'Recommended For You',
-              color: pumpkin,
-              width: width,
-            ),
-            SubHeading(
-              subHeading: 'See recommendations curated just for you!',
-              width: width,
-            ),
-            BookList(bookList: "weeklyRecommend"),
-            SizedBox(
-                height: 450,
-                child: Card(
-                    color: pumpkin,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Wrap(children: [
-                        Row(children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20.0, bottom: 20.0),
-                            child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(10), // Image border
-                                child: Image.asset(
-                                    'assets/images/bookcovers/catcherintherye.jpg',
-                                    fit: BoxFit.cover,
-                                    height: 250)),
-                          ),
-                          Expanded(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('The Catcher in the Rye',
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold)),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5.0),
-                                child: Text('J.D. Salinger'),
-                              ),
-                              Row(
-                                children: [
-                                  for (var i = 0; i < 5; i++) ...[
-                                    if (i == 4) ...[
-                                      Icon(Icons.star_rate,
-                                          color: Colors.grey, size: 16)
-                                    ] else ...[
-                                      Icon(Icons.star_rate,
-                                          color: Colors.yellow, size: 16)
-                                    ]
-                                  ]
-                                ],
-                              ),
-                              Padding(
-                                  padding: const EdgeInsets.only(
-                                      top: 15.0, bottom: 15.0),
-                                  child: TextButton(
-                                      onPressed: () {},
-                                      style: TextButton.styleFrom(
-                                          foregroundColor: Colors.black,
-                                          backgroundColor: Colors.white),
-                                      child: Text('Add to Favorites',
+                    Padding(
+                      padding: const EdgeInsets.only(top: 35.0, bottom: 30.0),
+                      child: ClipRRect(
+                          borderRadius: BorderRadius.circular(30.0),
+                          child: SizedBox.fromSize(
+                              size: Size(width, 200),
+                              child: Image.asset(
+                                  'assets/images/backgrounds/AANMAI.jpg',
+                                  fit: BoxFit.cover))),
+                    ),
+                    Categories(
+                        heading: 'Book Genres',
+                        color: pumpkin,
+                        width: width,
+                        categories: genre),
+                    Heading(
+                      heading: 'Recommended For You',
+                      color: pumpkin,
+                      width: width,
+                    ),
+                    SubHeading(
+                      subHeading: 'See recommendations curated just for you!',
+                      width: width,
+                    ),
+                    BookList(bookList: "weeklyRecommend"),
+                    SizedBox(
+                        height: 450,
+                        child: Card(
+                            color: pumpkin,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Wrap(children: [
+                                Row(children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20.0, bottom: 20.0),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Image border
+                                        child: Image.asset(
+                                            'assets/images/bookcovers/catcherintherye.jpg',
+                                            fit: BoxFit.cover,
+                                            height: 250)),
+                                  ),
+                                  Expanded(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('The Catcher in the Rye',
                                           style: TextStyle(
-                                              fontSize: 12.0,
-                                              fontWeight: FontWeight.bold))))
-                            ],
-                          ))
-                        ]),
-                        Text(
-                          reviewtxt,
-                          maxLines: 5,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
-                          children: [
-                            TextButton(
-                              style: TextButton.styleFrom(
-                                foregroundColor: Colors.black,
-                              ),
-                              onPressed: () {
-                                Navigator.pushNamed(context, '/review');
-                              },
-                              child: const Text('See More'),
-                            ),
-                            Icon(
-                              Icons.navigate_next,
-                            ),
-                          ],
-                        )
-                      ]),
-                    ))),
-            Heading(
-                heading: 'Valentine Day Specials',
-                color: pumpkin,
-                width: width),
-            SubHeading(
-              subHeading: 'See some of our most romantic recommendations!',
-              width: width,
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.bold)),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5.0),
+                                        child: Text('J.D. Salinger'),
+                                      ),
+                                      Row(
+                                        children: [
+                                          for (var i = 0; i < 5; i++) ...[
+                                            if (i == 4) ...[
+                                              Icon(Icons.star_rate,
+                                                  color: Colors.grey, size: 16)
+                                            ] else ...[
+                                              Icon(Icons.star_rate,
+                                                  color: Colors.yellow,
+                                                  size: 16)
+                                            ]
+                                          ]
+                                        ],
+                                      ),
+                                      Padding(
+                                          padding: const EdgeInsets.only(
+                                              top: 15.0, bottom: 15.0),
+                                          child: TextButton(
+                                              onPressed: () {},
+                                              style: TextButton.styleFrom(
+                                                  foregroundColor: Colors.black,
+                                                  backgroundColor:
+                                                      Colors.white),
+                                              child: Text('Add to Favorites',
+                                                  style: TextStyle(
+                                                      fontSize: 12.0,
+                                                      fontWeight:
+                                                          FontWeight.bold))))
+                                    ],
+                                  ))
+                                ]),
+                                Text(
+                                  reviewtxt,
+                                  maxLines: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Row(
+                                  children: [
+                                    TextButton(
+                                      style: TextButton.styleFrom(
+                                        foregroundColor: Colors.black,
+                                      ),
+                                      onPressed: () {
+                                        Navigator.pushNamed(context, '/review');
+                                      },
+                                      child: const Text('See More'),
+                                    ),
+                                    Icon(
+                                      Icons.navigate_next,
+                                    ),
+                                  ],
+                                )
+                              ]),
+                            ))),
+                    Heading(
+                        heading: 'Valentine Day Specials',
+                        color: pumpkin,
+                        width: width),
+                    SubHeading(
+                      subHeading:
+                          'See some of our most romantic recommendations!',
+                      width: width,
+                    ),
+                    BookList(bookList: "valentineDay"),
+                    Categories(
+                        heading: 'Industries',
+                        color: pumpkin,
+                        width: width,
+                        categories: industries),
+                    Heading(
+                        heading: 'Featured People',
+                        color: pumpkin,
+                        width: width),
+                    SubHeading(
+                        subHeading:
+                            'See what our featured people have recommended',
+                        width: width),
+                    PeopleList(
+                      people: "featurePeople",
+                    ),
+                    SizedBox(
+                        height: 400,
+                        child: Card(
+                            color: pumpkin,
+                            child: Padding(
+                              padding: const EdgeInsets.all(10.0),
+                              child: Wrap(children: [
+                                Row(children: [
+                                  Padding(
+                                    padding: const EdgeInsets.only(
+                                        right: 20.0, bottom: 20.0),
+                                    child: ClipRRect(
+                                        borderRadius: BorderRadius.circular(
+                                            10), // Image border
+                                        child: Image.asset(
+                                            'assets/images/people/malala.jpg',
+                                            fit: BoxFit.cover,
+                                            height: 200)),
+                                  ),
+                                  Expanded(
+                                      child: Column(
+                                    mainAxisAlignment: MainAxisAlignment.center,
+                                    crossAxisAlignment:
+                                        CrossAxisAlignment.start,
+                                    children: [
+                                      Text('Malala Yousafzai',
+                                          style: TextStyle(
+                                              fontSize: 20.0,
+                                              fontWeight: FontWeight.bold)),
+                                      Padding(
+                                        padding:
+                                            const EdgeInsets.only(bottom: 5.0),
+                                        child: Text(
+                                            'Pakistani Education Activist'),
+                                      ),
+                                    ],
+                                  ))
+                                ]),
+                                Text(
+                                  biotxt,
+                                  maxLines: 5,
+                                  overflow: TextOverflow.ellipsis,
+                                ),
+                                Row(
+                                  children: [
+                                    RichText(
+                                        text: TextSpan(
+                                            text: 'See Their Recommendations',
+                                            style: TextStyle(
+                                                color: Colors.black,
+                                                fontWeight: FontWeight.bold),
+                                            recognizer: TapGestureRecognizer()
+                                              ..onTap = () {})),
+                                    Icon(
+                                      Icons.navigate_next,
+                                    ),
+                                  ],
+                                )
+                              ]),
+                            ))),
+                    Heading(
+                        heading: 'Famous People in Thailand',
+                        color: pumpkin,
+                        width: width),
+                    SubHeading(
+                        subHeading:
+                            'See recommendations from people in Thailand!',
+                        width: width),
+                    PeopleList(
+                      people: "famousThais",
+                    ),
+                    ClipRRect(
+                        borderRadius: BorderRadius.circular(30.0),
+                        child: SizedBox.fromSize(
+                            size: Size(width, 250),
+                            child: Image.asset(
+                                'assets/images/backgrounds/bookclub.jpg',
+                                fit: BoxFit.cover))),
+                  ],
+                ),
+              ),
             ),
-            BookList(bookList: "valentineDay"),
-            Categories(
-                heading: 'Industries',
-                color: pumpkin,
-                width: width,
-                categories: industries),
-            Heading(heading: 'Featured People', color: pumpkin, width: width),
-            SubHeading(
-                subHeading: 'See what our featured people have recommended',
-                width: width),
-            PeopleList(people: "featurePeople",),
-            SizedBox(
-                height: 400,
-                child: Card(
-                    color: pumpkin,
-                    child: Padding(
-                      padding: const EdgeInsets.all(10.0),
-                      child: Wrap(children: [
-                        Row(children: [
-                          Padding(
-                            padding: const EdgeInsets.only(
-                                right: 20.0, bottom: 20.0),
-                            child: ClipRRect(
-                                borderRadius:
-                                    BorderRadius.circular(10), // Image border
-                                child: Image.asset(
-                                    'assets/images/people/malala.jpg',
-                                    fit: BoxFit.cover,
-                                    height: 200)),
-                          ),
-                          Expanded(
-                              child: Column(
-                            mainAxisAlignment: MainAxisAlignment.center,
-                            crossAxisAlignment: CrossAxisAlignment.start,
-                            children: [
-                              Text('Malala Yousafzai',
-                                  style: TextStyle(
-                                      fontSize: 20.0,
-                                      fontWeight: FontWeight.bold)),
-                              Padding(
-                                padding: const EdgeInsets.only(bottom: 5.0),
-                                child: Text('Pakistani Education Activist'),
-                              ),
-                            ],
-                          ))
-                        ]),
-                        Text(
-                          biotxt,
-                          maxLines: 5,
-                          overflow: TextOverflow.ellipsis,
-                        ),
-                        Row(
-                          children: [
-                            RichText(
-                                text: TextSpan(
-                                    text: 'See Their Recommendations',
-                                    style: TextStyle(
-                                        color: Colors.black,
-                                        fontWeight: FontWeight.bold),
-                                    recognizer: TapGestureRecognizer()
-                                      ..onTap = () {})),
-                            Icon(
-                              Icons.navigate_next,
-                            ),
-                          ],
-                        )
-                      ]),
-                    ))),
-            Heading(
-                heading: 'Famous People in Thailand',
-                color: pumpkin,
-                width: width),
-            SubHeading(
-                subHeading: 'See recommendations from people in Thailand!',
-                width: width),
-            PeopleList(people: "famousThais",),
-            ClipRRect(
-                borderRadius: BorderRadius.circular(30.0),
-                child: SizedBox.fromSize(
-                    size: Size(width, 250),
-                    child: Image.asset('assets/images/backgrounds/bookclub.jpg',
-                        fit: BoxFit.cover))),
-          ],
-        ),
-      ),
-    );
+          );
+        });
   }
 }
