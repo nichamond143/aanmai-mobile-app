@@ -45,6 +45,7 @@ Widget buildHeader(BuildContext context, String? name, String photoUrl) =>
               .push(MaterialPageRoute(builder: (context) => FavoritesPage()));
         },
         child: Container(
+            color: Color.fromARGB(255, 251, 248, 244),
             padding: EdgeInsets.only(
                 top: 24 + MediaQuery.of(context).padding.top, bottom: 24),
             child: Column(

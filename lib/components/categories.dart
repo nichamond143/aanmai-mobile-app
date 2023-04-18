@@ -42,7 +42,10 @@ class Categories extends StatelessWidget {
                           color: color,
                           decoration: TextDecoration.underline,
                           fontWeight: FontWeight.bold),
-                      recognizer: TapGestureRecognizer()..onTap = () {}))
+                      recognizer: TapGestureRecognizer()
+                        ..onTap = () {
+                          Navigator.pushNamed(context, '/genres');
+                        }))
             ],
           ),
         ),

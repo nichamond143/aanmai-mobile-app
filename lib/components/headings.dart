@@ -1,3 +1,4 @@
+import 'package:aanmai_app/pages/genres.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -26,14 +27,23 @@ class Heading extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold)),
               )),
           Expanded(child: SizedBox()),
-          RichText(
-              text: TextSpan(
-                  text: 'See More',
-                  style: TextStyle(
-                      color: color,
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.bold),
-                  recognizer: TapGestureRecognizer()..onTap = () {}))
+          GestureDetector(
+            onTap: () {
+              Navigator.push(
+                  context,
+                  MaterialPageRoute(
+                      builder: (context) => GenresPage()
+                          ));
+            },
+            child: RichText(
+                text: TextSpan(
+                    text: 'See More',
+                    style: TextStyle(
+                        color: color,
+                        decoration: TextDecoration.underline,
+                        fontWeight: FontWeight.bold),
+                    recognizer: TapGestureRecognizer()..onTap = () {})),
+          )
         ],
       ),
     );
@@ -53,7 +63,7 @@ class SubHeading extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Padding(
-      padding: const EdgeInsets.only(top: 15, bottom: 30),
+      padding: const EdgeInsets.only(top: 5, bottom: 25),
       child: SizedBox(
           width: width * 0.25,
           child: FittedBox(

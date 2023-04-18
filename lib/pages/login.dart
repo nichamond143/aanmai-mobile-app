@@ -19,19 +19,12 @@ class _LogInState extends State<LogIn> {
 
   //Log in users
   void logInUsers() async {
-    showDialog(
-      context: context,
-      builder: (context) => Center(child: CircularProgressIndicator()),
-    );
 
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
 
-      // ignore: use_build_context_synchronously
-      Navigator.pop(context);
     } on FirebaseAuthException catch (e) {
-      Navigator.pop(context);
 
       //Show error message
       showErrorMessage(e.code);

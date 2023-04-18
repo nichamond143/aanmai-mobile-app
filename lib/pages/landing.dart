@@ -1,40 +1,38 @@
-import 'package:aanmai_app/provider/favorite_provider.dart';
+import 'package:aanmai_app/pages/loading.dart';
 import 'package:aanmai_app/auth/auth_page.dart';
 import 'package:aanmai_app/pages/home.dart';
-import 'package:aanmai_app/pages/review.dart';
 import 'package:flutter/material.dart';
-import 'package:provider/provider.dart';
+import 'package:get/get.dart';
 
 import 'forgot_password.dart';
+import 'genres.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
 
   @override
   Widget build(BuildContext context) {
-    return ChangeNotifierProvider(
-      create: (context) => FavoriteProvider(),
-      child: MaterialApp(
-          title: 'Aan Mai',
-          theme: ThemeData(
-              useMaterial3: true,
-              fontFamily: 'Poppins',
-              primaryColor: Color.fromARGB(255, 236, 153, 75),
-              colorScheme: ColorScheme.fromSeed(
-                  seedColor: Color.fromARGB(255, 236, 153, 75)),
-              appBarTheme: AppBarTheme(
-                iconTheme: IconThemeData(color: Colors.black),
-                color: Color.fromARGB(220, 236, 153, 75), //<-- SEE HERE
-              )),
-          initialRoute: '/',
-          routes: {
-            '/': (context) => LandingPage(),
-            '/login': (context) => AuthPage(),
-            '/home': (context) => HomePage(),
-            '/review': (context) => ReviewPage(),
-            '/resetPassword': (context) => ForgotPasswordPage(),
-          }),
-    );
+    return GetMaterialApp(
+        title: 'Aan Mai',
+        theme: ThemeData(
+            useMaterial3: true,
+            fontFamily: 'Poppins',
+            primaryColor: Color.fromARGB(255, 236, 153, 75),
+            colorScheme: ColorScheme.fromSeed(
+                seedColor: Color.fromARGB(255, 236, 153, 75)),
+            appBarTheme: AppBarTheme(
+              iconTheme: IconThemeData(color: Colors.black),
+              color: Color.fromARGB(220, 236, 153, 75), //<-- SEE HERE
+            )),
+        initialRoute: '/',
+        routes: {
+          '/': (context) => LandingPage(),
+          '/loading': (context) => LoadingCat(),
+          '/authen': (context) => AuthPage(),
+          '/home': (context) => HomePage(),
+          '/resetPassword': (context) => ForgotPasswordPage(),
+          '/genres': (context) => GenresPage(),
+        });
   }
 }
 
@@ -71,7 +69,9 @@ class LandingPage extends StatelessWidget {
                 style: ElevatedButton.styleFrom(
                     backgroundColor: pumpkin, minimumSize: Size.fromHeight(50)),
                 onPressed: () {
-                  Navigator.pushNamed(context, '/login');
+                  Get.to(() => AuthPage(),
+                      transition: Transition.downToUp,
+                      duration: Duration(seconds: 1));
                 },
                 child: Text(
                   'Let\'s go',
