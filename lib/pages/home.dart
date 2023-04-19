@@ -137,6 +137,7 @@ class _HomePageState extends State<HomePage> {
                               width: width,
                               categories: genre),
                           Heading(
+                            collectionName: 'weekly',
                             heading: 'Weekly Recommendations',
                             color: pumpkin,
                             width: width,
@@ -151,6 +152,7 @@ class _HomePageState extends State<HomePage> {
                               documentName: 'recommendations'),
                           FeaturedBook(),
                           Heading(
+                              collectionName: 'valentine-day',
                               heading: 'Valentine Day Specials',
                               color: pumpkin,
                               width: width),
@@ -169,6 +171,7 @@ class _HomePageState extends State<HomePage> {
                               width: width,
                               categories: industries),
                           Heading(
+                              collectionName: "",
                               heading: 'Featured People',
                               color: pumpkin,
                               width: width),
@@ -182,6 +185,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 15.0),
                           FeaturedPeople(),
                           Heading(
+                              collectionName: "",
                               heading: 'Famous People in Thailand',
                               color: pumpkin,
                               width: width),

@@ -1,6 +1,8 @@
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:flutter/material.dart';
 
+import 'bookgenre.dart';
+
 class GenresPage extends StatefulWidget {
   GenresPage({super.key});
 
@@ -43,27 +45,40 @@ class _GenresPageState extends State<GenresPage> {
                                 padding: const EdgeInsets.only(top: 5),
                                 child: SizedBox(
                                   height: 125,
-                                  child: Card(
-                                    elevation: 20,
-                                    child: Container(
-                                      decoration: BoxDecoration(
-                                        borderRadius: BorderRadius.all(
-                                            Radius.circular(10)),
-                                        image: DecorationImage(
-                                          fit: BoxFit.cover,
-                                          image: NetworkImage(
-                                            documentSnapshot['thumbnail'],
+                                  child: GestureDetector(
+                                    onTap: () {
+                                      Navigator.push(
+                                          context,
+                                          MaterialPageRoute(
+                                              builder: (context) => BookGenre(
+                                                    documentName: 'library',
+                                                    collectionName:
+                                                        documentSnapshot[
+                                                            'genre'],
+                                                  )));
+                                    },
+                                    child: Card(
+                                      elevation: 20,
+                                      child: Container(
+                                        decoration: BoxDecoration(
+                                          borderRadius: BorderRadius.all(
+                                              Radius.circular(10)),
+                                          image: DecorationImage(
+                                            fit: BoxFit.cover,
+                                            image: NetworkImage(
+                                              documentSnapshot['thumbnail'],
+                                            ),
                                           ),
                                         ),
-                                      ),
-                                      child: ListTile(
-                                        title: Text(
-                                          documentSnapshot['genre'],
-                                          style: TextStyle(
-                                              color: Color.fromARGB(
-                                                  255, 255, 255, 255),
-                                              fontSize: 30.0,
-                                              fontWeight: FontWeight.bold),
+                                        child: ListTile(
+                                          title: Text(
+                                            documentSnapshot['genre'],
+                                            style: TextStyle(
+                                                color: Color.fromARGB(
+                                                    255, 255, 255, 255),
+                                                fontSize: 30.0,
+                                                fontWeight: FontWeight.bold),
+                                          ),
                                         ),
                                       ),
                                     ),

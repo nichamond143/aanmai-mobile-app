@@ -1,4 +1,4 @@
-import 'package:aanmai_app/pages/genres.dart';
+import 'package:aanmai_app/pages/bookgenre.dart';
 import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
@@ -6,10 +6,12 @@ class Heading extends StatelessWidget {
   const Heading({
     super.key,
     required this.heading,
+    required this.collectionName,
     required this.color,
     required this.width,
   });
 
+  final String collectionName;
   final String heading;
   final Color color;
   final double width;
@@ -27,23 +29,24 @@ class Heading extends StatelessWidget {
                     style: TextStyle(fontWeight: FontWeight.bold)),
               )),
           Expanded(child: SizedBox()),
-          GestureDetector(
-            onTap: () {
-              Navigator.push(
-                  context,
-                  MaterialPageRoute(
-                      builder: (context) => GenresPage()
-                          ));
-            },
-            child: RichText(
-                text: TextSpan(
-                    text: 'See More',
-                    style: TextStyle(
-                        color: color,
-                        decoration: TextDecoration.underline,
-                        fontWeight: FontWeight.bold),
-                    recognizer: TapGestureRecognizer()..onTap = () {})),
-          )
+          RichText(
+              text: TextSpan(
+                  text: 'See More',
+                  style: TextStyle(
+                      color: color,
+                      decoration: TextDecoration.underline,
+                      fontWeight: FontWeight.bold),
+                  recognizer: TapGestureRecognizer()
+                    ..onTap = () {
+                      Navigator.push(
+                          context,
+                          MaterialPageRoute(
+                              builder: (context) => BookGenre(
+                                    genreName: heading,
+                                    collectionName: collectionName,
+                                    documentName: 'recommendations',
+                                  )));
+                    }))
         ],
       ),
     );
