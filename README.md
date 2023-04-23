@@ -9,7 +9,7 @@ A mobile app which recommends users a variety of book recommendations with revie
 ## Getting Started
 
 To login/signup with Google Account: 
-- Run the command "keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%    android\debug.keystore" in terminal
+- Run the command "keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore" in terminal
 - Password: android
 - Add SHA1 and SHA2 fingerprint in Firebase application settings
 
