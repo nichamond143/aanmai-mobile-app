@@ -15,11 +15,11 @@ class Carousel extends StatelessWidget {
 
     final List<Widget> imageSliders = imgList
         .map((item) => Container(
-          margin: EdgeInsets.all(5.0),
-          child: ClipRRect(
-              borderRadius: BorderRadius.all(Radius.circular(5.0)),
-              child: Image.asset(item, fit: BoxFit.fill, width: 1000.0)),
-        ))
+              margin: EdgeInsets.all(5.0),
+              child: ClipRRect(
+                  borderRadius: BorderRadius.all(Radius.circular(5.0)),
+                  child: Image.asset(item, fit: BoxFit.fill, width: 1000.0)),
+            ))
         .toList();
 
     return CarouselSlider(

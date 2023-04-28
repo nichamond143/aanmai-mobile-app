@@ -1,15 +1,13 @@
 import 'package:aanmai_app/components/carousel.dart';
-import 'package:aanmai_app/components/featured_people.dart';
 import 'package:aanmai_app/pages/loading.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import 'dart:async' show Future;
 import 'package:aanmai_app/components/headings.dart';
-import 'package:aanmai_app/components/booklist.dart';
-import 'package:aanmai_app/components/categories.dart';
-import 'package:aanmai_app/components/peoplelist.dart';
-import '../components/featured_book.dart';
+import 'package:aanmai_app/components/item_row.dart';
+import 'package:aanmai_app/components/categories_list.dart';
+import '../components/featured.dart';
 import '../components/navigationbar.dart';
 
 class HomePage extends StatefulWidget {
@@ -26,7 +24,7 @@ class _HomePageState extends State<HomePage> {
   @override
   void initState() {
     _isLoading = true;
-    Future.delayed(const Duration(seconds: 5), () {
+    Future.delayed(const Duration(seconds: 3), () {
       setState(() {
         _isLoading = false;
       });
@@ -36,34 +34,6 @@ class _HomePageState extends State<HomePage> {
 
   @override
   Widget build(BuildContext context) {
-    var genre = <String>[
-      'Fantasy',
-      'Sci-Fi',
-      'Dystopian',
-      'Romance',
-      'Adventure',
-      'Mystery',
-      'Horror',
-      'Thriller',
-      'LGBTQ+',
-      'Historical Fiction',
-      'Young Adult'
-    ];
-
-    var industries = <String>[
-      'Activism',
-      'Entrepreneur',
-      'Influencer',
-      'Artist',
-      'Athletes',
-      'Education',
-      'Film',
-      'Comedy',
-      'Science',
-      'Politics',
-      'Technology'
-    ];
-
     var theme = Theme.of(context);
     Color pumpkin = theme.primaryColor;
 
@@ -131,15 +101,12 @@ class _HomePageState extends State<HomePage> {
                               padding: const EdgeInsets.only(
                                   top: 15.0, bottom: 30.0),
                               child: Carousel()),
-                          Categories(
+                          Genres(
                               heading: 'Book Genres',
                               color: pumpkin,
-                              width: width,
-                              categories: genre),
+                              width: width),
                           Heading(
-                            collectionName: 'weekly',
                             heading: 'Weekly Recommendations',
-                            color: pumpkin,
                             width: width,
                           ),
                           SubHeading(
@@ -152,10 +119,7 @@ class _HomePageState extends State<HomePage> {
                               documentName: 'recommendations'),
                           FeaturedBook(),
                           Heading(
-                              collectionName: 'valentine-day',
-                              heading: 'Valentine Day Specials',
-                              color: pumpkin,
-                              width: width),
+                              heading: 'Valentine Day Specials', width: width),
                           SubHeading(
                             subHeading:
                                 'See some of our most romantic recommendations!',
@@ -165,16 +129,11 @@ class _HomePageState extends State<HomePage> {
                             collectionName: 'valentine-day',
                             documentName: 'recommendations',
                           ),
-                          Categories(
+                          Industries(
                               heading: 'Industries',
                               color: pumpkin,
-                              width: width,
-                              categories: industries),
-                          Heading(
-                              collectionName: "",
-                              heading: 'Featured People',
-                              color: pumpkin,
                               width: width),
+                          Heading(heading: 'Featured People', width: width),
                           SubHeading(
                               subHeading:
                                   'See what our featured people have recommended',
@@ -185,9 +144,7 @@ class _HomePageState extends State<HomePage> {
                           SizedBox(height: 15.0),
                           FeaturedPeople(),
                           Heading(
-                              collectionName: "",
                               heading: 'Famous People in Thailand',
-                              color: pumpkin,
                               width: width),
                           SubHeading(
                               subHeading:
@@ -202,10 +159,10 @@ class _HomePageState extends State<HomePage> {
                           ClipRRect(
                               borderRadius: BorderRadius.circular(20.0),
                               child: SizedBox.fromSize(
-                                  size: Size(width, 250),
+                                  size: Size(width, 275),
                                   child: Image.asset(
-                                      'assets/images/backgrounds/bookclub.jpg',
-                                      fit: BoxFit.fill))),
+                                      'assets/images/backgrounds/feedback.jpg',
+                                      fit: BoxFit.cover))),
                         ],
                       ),
                     ),

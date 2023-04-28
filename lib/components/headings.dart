@@ -1,19 +1,13 @@
-import 'package:aanmai_app/pages/bookgenre.dart';
-import 'package:flutter/gestures.dart';
 import 'package:flutter/material.dart';
 
 class Heading extends StatelessWidget {
   const Heading({
     super.key,
     required this.heading,
-    required this.collectionName,
-    required this.color,
     required this.width,
   });
 
-  final String collectionName;
   final String heading;
-  final Color color;
   final double width;
 
   @override
@@ -23,30 +17,13 @@ class Heading extends StatelessWidget {
       child: Row(
         children: [
           SizedBox(
-              width: width * 0.6,
+              width: width * 0.8,
               child: FittedBox(
+                fit: BoxFit.fitWidth,
                 child: Text(heading,
-                    style: TextStyle(fontWeight: FontWeight.bold)),
+                    style:
+                        TextStyle(fontSize: 25, fontWeight: FontWeight.bold)),
               )),
-          Expanded(child: SizedBox()),
-          RichText(
-              text: TextSpan(
-                  text: 'See More',
-                  style: TextStyle(
-                      color: color,
-                      decoration: TextDecoration.underline,
-                      fontWeight: FontWeight.bold),
-                  recognizer: TapGestureRecognizer()
-                    ..onTap = () {
-                      Navigator.push(
-                          context,
-                          MaterialPageRoute(
-                              builder: (context) => BookGenre(
-                                    genreName: heading,
-                                    collectionName: collectionName,
-                                    documentName: 'recommendations',
-                                  )));
-                    }))
         ],
       ),
     );
@@ -70,6 +47,7 @@ class SubHeading extends StatelessWidget {
       child: SizedBox(
           width: width * 0.25,
           child: FittedBox(
+              fit: BoxFit.fitWidth,
               child: Text(subHeading, style: TextStyle(color: Colors.grey)))),
     );
   }

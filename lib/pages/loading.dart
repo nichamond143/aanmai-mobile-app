@@ -10,7 +10,6 @@ class LoadingCat extends StatefulWidget {
 }
 
 class _LoadingCatState extends State<LoadingCat> {
-
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -20,7 +19,7 @@ class _LoadingCatState extends State<LoadingCat> {
             SizedBox(
               height: 200,
               child: Lottie.asset('assets/images/logos/14636-white-cat.json',
-              fit: BoxFit.cover),
+                  fit: BoxFit.cover),
             ),
             Text('Finding the right books for you...',
                 textAlign: TextAlign.center,
@@ -33,7 +32,7 @@ class _LoadingCatState extends State<LoadingCat> {
               width: 300,
               child: LinearPercentIndicator(
                 animation: true,
-                animationDuration: 5000,
+                animationDuration: 2500,
                 lineHeight: 20,
                 barRadius: const Radius.circular(16),
                 percent: 1.0,

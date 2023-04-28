@@ -5,7 +5,6 @@ import 'package:flutter/material.dart';
 import 'package:get/get.dart';
 
 import 'forgot_password.dart';
-import 'genres.dart';
 
 class MyApp extends StatelessWidget {
   const MyApp({super.key});
@@ -31,7 +30,6 @@ class MyApp extends StatelessWidget {
           '/authen': (context) => AuthPage(),
           '/home': (context) => HomePage(),
           '/resetPassword': (context) => ForgotPasswordPage(),
-          '/genres': (context) => GenresPage(),
         });
   }
 }

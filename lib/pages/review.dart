@@ -82,7 +82,7 @@ class _ReviewPageState extends State<ReviewPage> {
           Map<String, dynamic> details =
               snapshot.data!.data() as Map<String, dynamic>;
           return Scaffold(
-            backgroundColor: Theme.of(context).primaryColor,
+            backgroundColor: Color.fromARGB(255, 251, 202, 137),
             appBar: AppBar(
                 //<Widget>[]
                 backgroundColor: Theme.of(context).primaryColor,
@@ -93,10 +93,13 @@ class _ReviewPageState extends State<ReviewPage> {
                 Align(
                   //book picture
                   alignment: Alignment.center,
-                  child: ClipRRect(
-                      borderRadius: BorderRadius.circular(10), // Image border
-                      child: Image.network(details['thumbnail'],
-                          fit: BoxFit.cover, height: 350)),
+                  child: Padding(
+                    padding: const EdgeInsets.only(top: 25),
+                    child: ClipRRect(
+                        borderRadius: BorderRadius.circular(10), // Image border
+                        child: Image.network(details['thumbnail'],
+                            fit: BoxFit.cover, height: 350)),
+                  ),
                 ),
                 StreamBuilder(
                     stream: FirebaseFirestore.instance
@@ -199,8 +202,6 @@ class _ReviewPageState extends State<ReviewPage> {
                               width:
                                   300, //width must be less than the width of Row(),
                               child: Text.rich(
-                                maxLines: 4,
-                                overflow: TextOverflow.ellipsis,
                                 TextSpan(
                                   children: [
                                     TextSpan(
@@ -221,8 +222,6 @@ class _ReviewPageState extends State<ReviewPage> {
                             width:
                                 300, //width must be less than the width of Row(),
                             child: Text.rich(
-                              maxLines: 4,
-                              overflow: TextOverflow.ellipsis,
                               TextSpan(
                                 children: [
                                   TextSpan(
