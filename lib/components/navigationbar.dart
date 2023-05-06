@@ -1,3 +1,4 @@
+import 'package:aanmai_app/pages/coming_soon.dart';
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/material.dart';
 import '../pages/favorites.dart';
@@ -97,8 +98,8 @@ Widget buildMenuItems(BuildContext context) => Container(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ComingSoon(title: 'Book Club')));
               }),
           ListTile(
               iconColor: Colors.orangeAccent,
@@ -108,8 +109,8 @@ Widget buildMenuItems(BuildContext context) => Container(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ComingSoon(title: 'Activities')));
               }),
           ListTile(
               iconColor: Colors.orangeAccent,
@@ -119,8 +120,8 @@ Widget buildMenuItems(BuildContext context) => Container(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ComingSoon(title: 'News')));
               }),
           ListTile(
               iconColor: Colors.orangeAccent,
@@ -130,8 +131,8 @@ Widget buildMenuItems(BuildContext context) => Container(
                       color: Colors.orangeAccent, fontWeight: FontWeight.bold)),
               onTap: () {
                 Navigator.pop(context);
-                Navigator.of(context).push(
-                    MaterialPageRoute(builder: (context) => Placeholder()));
+                Navigator.of(context).push(MaterialPageRoute(
+                    builder: (context) => ComingSoon(title: 'Settings')));
               }),
           ListTile(
               iconColor: Colors.orangeAccent,

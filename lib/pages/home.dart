@@ -55,19 +55,15 @@ class _HomePageState extends State<HomePage> {
             fullName = "${data['firstName']} ${data['lastName']}";
             photoUrl = data['photoUrl'];
             return Scaffold(
-              appBar: AppBar(
-                  leading: Builder(builder: (BuildContext context) {
-                    return IconButton(
-                      icon: const Icon(Icons.sort, size: 40.0),
-                      tooltip: 'Menu Icon',
-                      onPressed: () {
-                        Scaffold.of(context).openDrawer();
-                      },
-                    );
-                  }),
-                  actions: <Widget>[
-                    Icon(Icons.notifications_none, size: 35.0),
-                  ]),
+              appBar: AppBar(leading: Builder(builder: (BuildContext context) {
+                return IconButton(
+                  icon: const Icon(Icons.sort, size: 40.0),
+                  tooltip: 'Menu Icon',
+                  onPressed: () {
+                    Scaffold.of(context).openDrawer();
+                  },
+                );
+              })),
               drawer: HamburgerDrawer(
                 name: fullName,
                 photoUrl: photoUrl,
