@@ -24,6 +24,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
           .sendPasswordResetEmail(email: emailController.text.trim());
       // ignore: use_build_context_synchronously
       showDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           builder: (context) {
             return AlertDialog(
@@ -48,6 +49,7 @@ class _ForgotPasswordPageState extends State<ForgotPasswordPage> {
     } on FirebaseAuthException catch (e) {
       print(e);
       showDialog(
+          // ignore: use_build_context_synchronously
           context: context,
           builder: (context) {
             return AlertDialog(

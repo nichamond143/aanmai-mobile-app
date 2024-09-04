@@ -26,7 +26,6 @@ class _BookListState extends State<BookList> {
             .collection('books')
             .doc(widget.documentName)
             .collection(widget.collectionName)
-            .where('title', isNotEqualTo: 'The Catcher in the Rye')
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {
@@ -100,7 +99,6 @@ class _PeopleListState extends State<PeopleList> {
             .collection('people')
             .doc('featured')
             .collection(widget.collectionName)
-            .where('name', isNotEqualTo: 'Kim Nam-joon')
             .snapshots(),
         builder: (context, AsyncSnapshot<QuerySnapshot> streamSnapshot) {
           if (streamSnapshot.hasData) {

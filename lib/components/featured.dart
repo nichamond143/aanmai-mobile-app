@@ -173,9 +173,9 @@ class FeaturedPeople extends StatelessWidget {
                                                       profile:
                                                           details['profile'],
                                                       genreName:
-                                                          'Kim Nam-joon\'s Book List',
+                                                          '${details['name']} Book List',
                                                       collectionName:
-                                                          'Kim Nam-joon',
+                                                          '${details['name']}',
                                                     )));
                                       })),
                             Icon(

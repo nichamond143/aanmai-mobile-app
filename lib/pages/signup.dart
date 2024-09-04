@@ -20,6 +20,16 @@ class _SignUpState extends State<SignUp> {
   final TextEditingController passwordController = TextEditingController();
   final TextEditingController confirmPassController = TextEditingController();
 
+  @override
+  void dispose() {
+    firstNameController.dispose();
+    lastNameController.dispose();
+    emailController.dispose();
+    passwordController.dispose();
+    confirmPassController.dispose();
+    super.dispose();
+  }
+
   //Sign up users
   void signUpUsers() async {
     showDialog(
@@ -34,29 +44,38 @@ class _SignUpState extends State<SignUp> {
           password: passwordController.text,
         );
         final User? currentUser = FirebaseAuth.instance.currentUser;
-        await saveUser(firstNameController.text.trim(),
-            lastNameController.text.trim(), emailController.text.trim(), currentUser);
+        await saveUser(
+            firstNameController.text.trim(),
+            lastNameController.text.trim(),
+            emailController.text.trim(),
+            currentUser);
 
+          // ignore: use_build_context_synchronously
+          Navigator.pop(context);
+      } else {
         // ignore: use_build_context_synchronously
         Navigator.pop(context);
-      } else {
-        showErrorMessage("Oops! Passwords don't match");
+        showErrorMessage("Oops! Passwords don't match!");
       }
     } on FirebaseAuthException catch (e) {
+      // ignore: use_build_context_synchronously
       Navigator.pop(context);
-
       //Show error message
       showErrorMessage(e.code);
     }
   }
 
-  Future<void> saveUser(
-      String firstName, String lastName, String email, User? currentUser) async {
-    await FirebaseFirestore.instance.collection('users').doc(currentUser!.uid).set({
+  Future<void> saveUser(String firstName, String lastName, String email,
+      User? currentUser) async {
+    await FirebaseFirestore.instance
+        .collection('users')
+        .doc(currentUser!.uid)
+        .set({
       "email": email,
       "firstName": firstName,
       "lastName": lastName,
-      "photoUrl": "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
+      "photoUrl":
+          "https://cdn.pixabay.com/photo/2015/10/05/22/37/blank-profile-picture-973460_960_720.png",
       "uid": currentUser.uid,
     });
   }
@@ -71,9 +90,13 @@ class _SignUpState extends State<SignUp> {
               children: [
                 Icon(Icons.sentiment_dissatisfied_outlined),
                 SizedBox(width: 10.0),
-                Text(
-                  message,
-                  style: TextStyle(fontSize: 20.0),
+                Expanded(
+                  child: Text(
+                    message,
+                    style: TextStyle(fontSize: 20.0),
+                    softWrap: true,
+                    overflow: TextOverflow.visible,
+                  ),
                 )
               ],
             ),

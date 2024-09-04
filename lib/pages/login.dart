@@ -19,13 +19,10 @@ class _LogInState extends State<LogIn> {
 
   //Log in users
   void logInUsers() async {
-
     try {
       await FirebaseAuth.instance.signInWithEmailAndPassword(
           email: emailController.text, password: passwordController.text);
-
     } on FirebaseAuthException catch (e) {
-
       //Show error message
       showErrorMessage(e.code);
     }
@@ -66,10 +63,13 @@ class _LogInState extends State<LogIn> {
             backgroundColor: Color(0xFFF9E3CE),
             resizeToAvoidBottomInset: false,
             body: SafeArea(
-              child: Center(
-                child: Padding(
-                    padding: const EdgeInsets.fromLTRB(30, 50, 30, 0),
+              child: Column(
+                mainAxisAlignment: MainAxisAlignment.center,
+                children: [
+                  Padding(
+                    padding: const EdgeInsets.symmetric(horizontal: 30),
                     child: ListView(
+                      shrinkWrap: true,
                       children: <Widget>[
                         Container(
                             alignment: Alignment.center,
@@ -81,7 +81,7 @@ class _LogInState extends State<LogIn> {
                                   fontWeight: FontWeight.bold,
                                   fontSize: 50),
                             )),
-
+                                      
                         //Input Email
                         MyTextField(
                           controller: emailController,
@@ -89,7 +89,7 @@ class _LogInState extends State<LogIn> {
                           obsecuredText: false,
                           icon: Icons.person_outlined,
                         ),
-
+                                      
                         //Input Password
                         MyTextField(
                           controller: passwordController,
@@ -97,7 +97,7 @@ class _LogInState extends State<LogIn> {
                           obsecuredText: true,
                           icon: Icons.lock_outlined,
                         ),
-
+                                      
                         //Forgot Password
                         TextButton(
                           onPressed: () {
@@ -111,9 +111,9 @@ class _LogInState extends State<LogIn> {
                             ),
                           ),
                         ),
-
+                                      
                         SizedBox(height: 20),
-
+                                      
                         //Login button
                         Container(
                             height: 60,
@@ -136,9 +136,9 @@ class _LogInState extends State<LogIn> {
                                 logInUsers();
                               },
                             )),
-
+                                      
                         SizedBox(height: 50.0),
-
+                                      
                         Padding(
                           padding: const EdgeInsets.symmetric(horizontal: 15.0),
                           child: Row(
@@ -157,9 +157,9 @@ class _LogInState extends State<LogIn> {
                             ],
                           ),
                         ),
-
+                                      
                         const SizedBox(height: 50.0),
-
+                                      
                         Row(
                           mainAxisAlignment: MainAxisAlignment.center,
                           children: [
@@ -178,28 +178,31 @@ class _LogInState extends State<LogIn> {
                                 label: 'Facebook')
                           ],
                         ),
-
-                        SizedBox(height: 10.0),
-
-                        Row(
-                          mainAxisAlignment: MainAxisAlignment.center,
-                          children: <Widget>[
-                            const Text('Don\'t have an account?'),
-                            Padding(
-                              padding: const EdgeInsets.all(5.0),
-                              child: GestureDetector(
-                                onTap: widget.onTap,
-                                child: Text(
-                                  'Sign Up Now',
-                                  style: TextStyle(
-                                      fontSize: 15, color: Color(0xFFF68922)),
+                                      
+                        Padding(
+                          padding: const EdgeInsets.all(10.0),
+                          child: Row(
+                            mainAxisAlignment: MainAxisAlignment.center,
+                            children: <Widget>[
+                              const Text('Don\'t have an account?'),
+                              Padding(
+                                padding: const EdgeInsets.all(5.0),
+                                child: GestureDetector(
+                                  onTap: widget.onTap,
+                                  child: Text(
+                                    'Sign Up Now',
+                                    style: TextStyle(
+                                        fontSize: 15, color: Color(0xFFF68922)),
+                                  ),
                                 ),
-                              ),
-                            )
-                          ],
+                              )
+                            ],
+                          ),
                         ),
                       ],
-                    )),
+                    ),
+                  ),
+                ],
               ),
             )));
   }

@@ -107,7 +107,7 @@ class _IndustriesPageState extends State<IndustriesPage> {
   Widget build(BuildContext context) {
     return Scaffold(
         appBar: AppBar(
-          title: Text('Genres'),
+          title: Text('Industries'),
         ),
         body: Padding(
           padding: const EdgeInsets.only(top: 10),

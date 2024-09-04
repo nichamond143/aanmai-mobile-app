@@ -115,14 +115,14 @@ class _HomePageState extends State<HomePage> {
                               documentName: 'recommendations'),
                           FeaturedBook(),
                           Heading(
-                              heading: 'Valentine Day Specials', width: width),
+                              heading: 'Halloween Specials', width: width),
                           SubHeading(
                             subHeading:
-                                'See some of our most romantic recommendations!',
+                                'See some of our most spooky recommendations!',
                             width: width,
                           ),
                           BookList(
-                            collectionName: 'valentine-day',
+                            collectionName: 'halloween',
                             documentName: 'recommendations',
                           ),
                           Industries(
