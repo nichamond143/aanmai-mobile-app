@@ -1,25 +1,20 @@
-# aanmai_app
+# Aanmai App
 
-A mobile app which recommends users a variety of book recommendations with reviews, ratings, and book related activities. This lifestyle application is made for people who have trouble deciding whether to read and/or buy a book. The features include:
+**Aanmai** is a mobile application designed to recommend a curated selection of books handpicked by our team and notable figures from various industries. Whether you're struggling to decide what to read or looking for inspiration from the books that have influenced your role models, Aanmai has you covered. The app is developed using **Flutter** for the front end and **Firebase** for the back end.
 
-· Recommend books by genre, author, and language
+### Key Features:
+- Personalized book recommendations based on genre and occasion.
+- Recommendations from notable people across different industries.
+- Ability to favorite books for easy reference.
+- Read reviews and ratings from our team for recommended books.
+- User authentication with email/password, Google, or Facebook.
+- Direct links to purchase books from external sources.
+- View ratings and reviews curated by our team.
 
-· View ratings and reviews
+## UI
+| ![landing screen](assets/images/examples/landing.png) | ![login screen](assets/images/examples/login.png) | ![sign up screen](assets/images/examples/sign-up.png) | ![loading screen](assets/images/examples/loading.png) | ![navigation screen](assets/images/examples/nav.png) |
+| :-----------------------------------------------------: | :------------------------------------------------: | :----------------------------------------------------: | :----------------------------------------------------: | :----------------------------------------------------: |
+| ![home screen](assets/images/examples/home-1.png)     | ![home screen](assets/images/examples/home-2.png) | ![home screen](assets/images/examples/home-3.png)     | ![home screen](assets/images/examples/home-4.png)     | ![genre screen](assets/images/examples/genre.png)     |
+| ![genre recommendations](assets/images/examples/genre-rec.png) | ![industry screen](assets/images/examples/industry.png) | ![industry recommendations](assets/images/examples/recommend.png) | ![book page](assets/images/examples/book-fav.png) | ![favorites page](assets/images/examples/fav.png) |
 
-## Getting Started
 
-To login/signup with Google Account: 
-- Run the command "keytool -list -v -alias androiddebugkey -keystore %USERPROFILE%\.android\debug.keystore" in terminal
-- Password: android
-- Add SHA1 and SHA2 fingerprint in Firebase application settings
-
-This project is a starting point for a Flutter application.
-
-A few resources to get you started if this is your first Flutter project:
-
-- [Lab: Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Cookbook: Useful Flutter samples](https://docs.flutter.dev/cookbook)
-
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
